@@ -55,8 +55,7 @@ Mirrors the Framer breakpoints (Desktop / Tablet / Phone), with a few things don
 
 ## Animations
 
-Inspired by the reference Framer build (`berrielbrands_com.html`), reproduced with plain
-CSS + a tiny `IntersectionObserver` — no framework runtime:
+Reproduced with plain CSS + a tiny `IntersectionObserver` — no framework runtime:
 
 - **Reveal on scroll** — elements fade in and rise from `translateY(16px)` as they enter the
   viewport (Framer's signature "appear" effect), with a slight stagger across grids/rows.
@@ -69,13 +68,10 @@ CSS + a tiny `IntersectionObserver` — no framework runtime:
 
 - **Logo** — `logo.svg` (the brand ring mark, `#0A0A0A` to suit the light theme) is used in
   the header and as the browser favicon.
-- **Reference file** — `berrielbrands_com.html` is the Framer export the design draws from.
-  It's kept locally for reference and git-ignored (it's a 638 KB generated file).
 - **Images** are hot-linked from Framer's CDN (`framerusercontent.com`). To make the site
   fully self-contained, download them into an `images/` folder and update the `src`s.
 - **Muted text colors** — Framer's exported text styles didn't include color values, so
   eyebrows, body paragraphs, and the footer use the `Muted` token (the evident intent on a
   dark theme). Headings/labels use `Text`.
 - **Service row dividers** use the `Line` token (a thin top border on each row).
-- **Contact email** is still `hello@victorberriel.com` — it was left unchanged in Framer
-  (the name was renamed but the email domain wasn't decided). Update it in `index.html`.
+- **Contact email** is `hello@airesgraphics.com` (set in `index.html`).

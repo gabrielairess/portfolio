@@ -160,8 +160,29 @@ img { display: block; max-width: 100%; }
 }
 .nav-cta:hover > span::after { transform: scaleX(0); }
 
-/* ---------- Top bar ---------- */
+/* ---------- Top bar (persistent, transparent, adaptive) ----------
+   Sticky + fully transparent. mix-blend-mode: difference makes the
+   contents auto-invert against whatever scrolls underneath, so the
+   nav reads white over dark sections and black over light ones. */
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  mix-blend-mode: difference;
+  color: #fff;          /* difference vs white => black on light bg, white on dark */
+  pointer-events: none; /* let the blend layer ignore clicks... */
+}
+.topbar a { pointer-events: auto; } /* ...but keep the links clickable */
+/* Force all text/separators to the blend color so inversion is uniform. */
+.topbar .nav a,
+.topbar .nav__sep,
+.topbar .nav-cta {
+  color: #fff;
+}
+/* Logo: invert the dark SVG to white so difference-blends correctly. */
+.topbar .brand__logo { filter: invert(1); }
+.topbar__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,7 +209,6 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
   transition: color 0.2s var(--ease);
 }
-.nav a:hover { color: var(--text); }
 /* Smooth underline sliding in from the left */
 .nav a::after {
   content: "";
