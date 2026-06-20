@@ -86,27 +86,6 @@
     }
   }
 
-  // 4. Adaptive header: flip to light text when a dark-backed section is
-  //    under the top bar. The page is light overall, so this mainly keeps
-  //    the header readable as content scrolls past. Sections (or elements)
-  //    tagged with [data-dark] drive the toggle.
-  var topbar = document.querySelector(".topbar");
-  var darkZones = document.querySelectorAll("[data-dark]");
-  if (topbar && darkZones.length && "IntersectionObserver" in window) {
-    var headerH = topbar.offsetHeight || 80;
-    var darkObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          entry.target.__overHeader = entry.isIntersecting;
-        });
-        var anyDark = Array.prototype.some.call(darkZones, function (z) {
-          return z.__overHeader;
-        });
-        topbar.classList.toggle("is-dark", anyDark);
-      },
-      // A thin band right under the header; when a dark zone overlaps it, flip.
-      { rootMargin: "0px 0px -" + (window.innerHeight - headerH) + "px 0px", threshold: 0 }
-    );
-    darkZones.forEach(function (z) { darkObserver.observe(z); });
-  }
+  // The adaptive top bar is handled purely in CSS via
+  // mix-blend-mode: difference — no JS needed.
 })();
