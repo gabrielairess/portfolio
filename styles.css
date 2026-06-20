@@ -161,34 +161,35 @@ img { display: block; max-width: 100%; }
 .nav-cta:hover > span::after { transform: scaleX(0); }
 
 /* ---------- Top bar (persistent, transparent, adaptive) ----------
-   Sticky + fully transparent. mix-blend-mode: difference makes the
-   contents auto-invert against whatever scrolls underneath, so the
-   nav reads white over dark sections and black over light ones. */
+   Sticky + fully transparent. The contents adapt to the section
+   behind them: dark text over light sections, light text over dark
+   ones. The `.is-dark` class is toggled from main.js based on which
+   section is under the header. */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 100;
   background: transparent;
-  mix-blend-mode: difference;
-  color: #fff;          /* difference vs white => black on light bg, white on dark */
-  pointer-events: none; /* let the blend layer ignore clicks... */
+  color: var(--text);
+  transition: color 0.3s var(--ease-out);
 }
-.topbar a { pointer-events: auto; } /* ...but keep the links clickable */
-/* Force all text/separators to the blend color so inversion is uniform. */
-.topbar .nav a,
-.topbar .nav__sep,
-.topbar .nav-cta {
-  color: #fff;
-}
-/* Logo: invert the dark SVG to white so difference-blends correctly. */
-.topbar .brand__logo { filter: invert(1); }
 .topbar__inner {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   padding-block: 28px;
 }
+/* Adaptive colors: links/separators follow the header color. */
+.topbar .nav a,
+.topbar .nav__sep,
+.topbar .nav-cta { color: currentColor; transition: color 0.3s var(--ease-out); }
+.topbar .brand__logo { transition: filter 0.3s var(--ease-out); }
+
+/* Over a dark section: flip everything to white. */
+.topbar.is-dark { color: #fff; }
+.topbar.is-dark .brand__logo { filter: invert(1); }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand__logo { width: 40px; height: 40px; display: block; }
 .brand__name { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
@@ -432,8 +433,9 @@ img { display: block; max-width: 100%; }
 @media (max-width: 700px) {
   :root { --pad: 16px; }
 
-  /* Phone: hide the center nav (logo + Get in touch only) — chosen behavior */
+  /* Phone: hide the center nav; keep logo (left) + Let's Talk (right). */
   .nav { display: none; }
+  .topbar__inner { flex-direction: row; align-items: center; }
 
   .grid { grid-template-columns: 1fr; }
 
