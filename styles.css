@@ -4,7 +4,22 @@
    Design tokens, type styles and layout mirror the Framer source.
    ============================================================ */
 
+/* ---------- Fonts (self-hosted, /fonts folder) ----------
+   PP Neue Montreal — headings + body
+   Single Medium weight; allowed to cover 400–600 so the browser
+   synthesizes lighter/heavier where the design asks for it. */
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  /* Font families */
+  --font-sans: "PP Neue Montreal", system-ui, -apple-system, sans-serif;
+
   /* Light theme */
   --bg: #FFFFFF;        /* page background        */
   --surface: #F4F2EF;   /* subtle raised surface  */
@@ -34,7 +49,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -68,16 +83,15 @@ img { display: block; max-width: 100%; }
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
-/* /Eyebrow — 13px */
+/* /Eyebrow — mono label style */
 .eyebrow {
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: 20px;
   font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--muted);
 }
 /* /Body — 16px */
 .body {
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -101,8 +115,8 @@ img { display: block; max-width: 100%; }
   gap: 8px;
   border-radius: 100px;
   font-weight: 500;
-  font-size: 16px;
-  padding: 13px 22px;
+  font-size: 20px;
+  padding: 8px 16px;
   border: 1px solid transparent;
   transition: transform 0.15s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
@@ -115,6 +129,37 @@ img { display: block; max-width: 100%; }
 .btn--accent { background: var(--accent); color: #fff; padding: 14px 24px; }
 .btn--sm { padding: 10px 16px; }
 
+/* berrielbrands.com button styling */
+.btn--light { background: #ECECEC; color: #0A0A0A; }
+.btn--light:hover { background: #E2E2E2; opacity: 1; }
+
+/* Nav CTA ("Let's Talk") — plain link (no pill background).
+   Inverted underline: visible by default, fades out on hover. */
+.nav-cta {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+}
+.nav-cta > span {
+  position: relative;
+  display: inline-block;
+}
+.nav-cta > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+.nav-cta:hover > span::after { transform: scaleX(0); }
+
 /* ---------- Top bar ---------- */
 .topbar {
   display: flex;
@@ -124,17 +169,40 @@ img { display: block; max-width: 100%; }
   padding-block: 28px;
 }
 .brand { display: flex; align-items: center; gap: 10px; }
-.brand__logo { width: 26px; height: 26px; display: block; }
+.brand__logo { width: 40px; height: 40px; display: block; }
 .brand__name { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
-.nav { display: flex; gap: 32px; }
-.nav a {
-  font-size: 13px;
+.nav { display: flex; align-items: baseline; }
+.nav__sep {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1;
   font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--muted);
+  margin-right: .35rem;
+}
+.nav a {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
   transition: color 0.2s var(--ease);
 }
 .nav a:hover { color: var(--text); }
+/* Smooth underline sliding in from the left */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+.nav a:hover::after { transform: scaleX(1); }
 
 /* ---------- Intro ---------- */
 .intro {
@@ -303,9 +371,37 @@ img { display: block; max-width: 100%; }
 .js .services__list > [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
 .js .services__list > [data-reveal]:nth-child(4) { transition-delay: 0.24s; }
 
+/* ============================================================
+   On-appear (page load) — hero heading reveals word by word,
+   each word rising + fading into place with a stagger, like the
+   Framer source. Other [data-reveal] elements in the first screen
+   are released on load too (handled in main.js).
+   ============================================================ */
+.js .split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Extend the clip box below the baseline so descenders (g, y, p)
+     aren't cropped, then pull it back so layout is unchanged. */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
+}
+.js .split-word > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%) rotate(2deg);
+  transition: opacity 0.7s var(--ease-out), transform 0.9s var(--ease-out);
+  transition-delay: var(--word-delay, 0s);
+}
+.js .split-word.is-in > span {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-reveal] { transition: none; opacity: 1; transform: none; }
+  .js .split-word > span { transition: none; opacity: 1; transform: none; }
 }
 
 /* ============================================================
