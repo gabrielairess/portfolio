@@ -1,0 +1,284 @@
+/* ============================================================
+   Gabriel Aires — portfolio
+   Rebuilt in code from the Framer project.
+   Design tokens, type styles and layout mirror the Framer source.
+   ============================================================ */
+
+:root {
+  --bg: #0A0A0A;        /* /Background */
+  --surface: #141414;   /* /Surface   */
+  --text: #F2F0ED;      /* /Text      */
+  --muted: #8A8A85;     /* /Muted     */
+  --line: rgba(255, 255, 255, 0.1); /* /Line */
+  --accent: #FF2D16;    /* /Accent    */
+
+  --maxw: 1120px;
+  --pad: 24px;
+}
+
+/* ---------- Reset ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* ---------- Type styles (from Framer text styles) ---------- */
+/* /Display — 76px on desktop, fluid down for smaller screens */
+.display {
+  font-weight: 600;
+  font-size: clamp(2.6rem, 1.1rem + 6.2vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+/* /Section Title — 40px desktop, fluid */
+.section-title {
+  font-weight: 600;
+  font-size: clamp(1.75rem, 1rem + 3vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+/* /Eyebrow — 13px */
+.eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+/* /Body — 16px */
+.body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+/* /Label — 16px */
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.link { transition: color 0.2s ease; }
+.link:hover { color: var(--text); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 13px 22px;
+  transition: transform 0.15s ease, opacity 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+.btn:hover { opacity: 0.9; }
+.btn:active { transform: translateY(1px); }
+.btn--light { background: #F2F0ED; color: #0A0A0A; }
+.btn--ghost { background: rgba(255, 255, 255, 0.04); color: var(--text); }
+.btn--ghost:hover { background: rgba(255, 255, 255, 0.08); opacity: 1; }
+.btn--accent { background: var(--accent); color: #fff; padding: 14px 24px; }
+.btn--sm { padding: 10px 16px; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 28px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand__dot { width: 26px; height: 26px; border-radius: 100px; background: var(--accent); }
+.brand__name { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+.nav { display: flex; gap: 32px; }
+.nav a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.nav a:hover { color: var(--text); }
+
+/* ---------- Intro ---------- */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  padding-block: 80px 64px;
+}
+.intro__sub { max-width: 560px; }
+.intro__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- Work ---------- */
+.work {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-block: 64px;
+}
+.work__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+/* auto-fill columns: 2 up on desktop/tablet, 1 on phone — mirrors the Framer grid fix */
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
+}
+.tile {
+  aspect-ratio: 3 / 2;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile--accent {
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 24px;
+}
+.tile--accent p {
+  font-weight: 600;
+  font-size: clamp(1.15rem, 0.9rem + 1vw, 1.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Services ---------- */
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-block: 64px;
+}
+.services__head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+}
+.services__list { display: flex; flex-direction: column; }
+.service-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding-block: 28px;
+  border-top: 1px solid var(--line);
+}
+.service-row__num { width: 48px; flex-shrink: 0; font-weight: 500; color: var(--muted); }
+.service-row__label { width: 240px; flex-shrink: 0; }
+.service-row__desc { flex: 1; min-width: 260px; }
+
+/* ---------- About ---------- */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+  padding-block: 64px;
+}
+.about__img {
+  width: 260px;
+  height: 320px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: cover;
+}
+.about__content {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.about__content .body { max-width: 560px; }
+.about__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: gap 0.2s ease;
+}
+.about__link:hover { gap: 12px; }
+
+/* ---------- Contact ---------- */
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  padding-block: 96px 56px;
+}
+.contact__title {
+  font-weight: 600;
+  font-size: clamp(2.2rem, 1rem + 5vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  text-wrap: balance;
+}
+.footer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-top: 32px;
+}
+.footer__social { display: flex; gap: 24px; }
+.footer__social a { transition: color 0.2s ease; }
+.footer__social a:hover { color: var(--text); }
+
+/* ============================================================
+   Responsive — phone breakpoint
+   (tablet keeps the desktop layout; type scales fluidly via clamp,
+    the grid collapses via auto-fill, About/Services wrap via flexbox)
+   ============================================================ */
+@media (max-width: 700px) {
+  :root { --pad: 16px; }
+
+  /* Phone: hide the center nav (logo + Get in touch only) — chosen behavior */
+  .nav { display: none; }
+
+  .intro { padding-block: 56px 48px; }
+  .work,
+  .services,
+  .about { padding-block: 48px; }
+  .contact { padding-block: 72px 48px; }
+
+  .about__img { width: 100%; height: auto; aspect-ratio: 13 / 16; }
+}
