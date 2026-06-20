@@ -5,14 +5,21 @@
    ============================================================ */
 
 :root {
-  --bg: #0A0A0A;        /* /Background */
-  --surface: #141414;   /* /Surface   */
-  --text: #F2F0ED;      /* /Text      */
-  --muted: #8A8A85;     /* /Muted     */
-  --line: rgba(255, 255, 255, 0.1); /* /Line */
-  --accent: #FF2D16;    /* /Accent    */
+  /* Light theme */
+  --bg: #FFFFFF;        /* page background        */
+  --surface: #F4F2EF;   /* subtle raised surface  */
+  --text: #0A0A0A;      /* primary text           */
+  --muted: #6B6B66;     /* secondary text         */
+  --line: rgba(0, 0, 0, 0.12); /* hairline borders */
+  --accent: #FF2D16;    /* accent (unchanged)     */
 
-  --maxw: 1120px;
+  /* Buttons */
+  --btn-solid-bg: #0A0A0A;
+  --btn-solid-fg: #FFFFFF;
+  --btn-ghost-bg: rgba(0, 0, 0, 0.05);
+  --btn-ghost-bg-hover: rgba(0, 0, 0, 0.09);
+
+  --maxw: 1200px;       /* ~berrielbrands.com content width */
   --pad: 24px;
 
   --ease: cubic-bezier(0.5, 0, 0.88, 0.77);   /* Framer hover easing */
@@ -63,7 +70,7 @@ img { display: block; max-width: 100%; }
 }
 /* /Eyebrow — 13px */
 .eyebrow {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--muted);
@@ -96,14 +103,15 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
   font-size: 16px;
   padding: 13px 22px;
-  transition: transform 0.15s ease, opacity 0.2s ease, background 0.2s ease;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
 }
 .btn:hover { opacity: 0.9; }
 .btn:active { transform: translateY(1px); }
-.btn--light { background: #F2F0ED; color: #0A0A0A; }
-.btn--ghost { background: rgba(255, 255, 255, 0.04); color: var(--text); }
-.btn--ghost:hover { background: rgba(255, 255, 255, 0.08); opacity: 1; }
+.btn--solid { background: var(--btn-solid-bg); color: var(--btn-solid-fg); }
+.btn--ghost { background: var(--btn-ghost-bg); color: var(--text); border-color: var(--line); }
+.btn--ghost:hover { background: var(--btn-ghost-bg-hover); opacity: 1; }
 .btn--accent { background: var(--accent); color: #fff; padding: 14px 24px; }
 .btn--sm { padding: 10px 16px; }
 
@@ -151,11 +159,11 @@ img { display: block; max-width: 100%; }
   justify-content: space-between;
   align-items: flex-end;
 }
-/* auto-fill columns: 2 up on desktop/tablet, 1 on phone — mirrors the Framer grid fix */
+/* 2 columns on desktop/tablet; collapses to 1 on phone (see breakpoint below) */
 .grid {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
+  grid-template-columns: repeat(2, 1fr);
 }
 .tile {
   aspect-ratio: 3 / 2;
@@ -303,13 +311,15 @@ img { display: block; max-width: 100%; }
 /* ============================================================
    Responsive — phone breakpoint
    (tablet keeps the desktop layout; type scales fluidly via clamp,
-    the grid collapses via auto-fill, About/Services wrap via flexbox)
+    the grid collapses to 1 column, About/Services wrap via flexbox)
    ============================================================ */
 @media (max-width: 700px) {
   :root { --pad: 16px; }
 
   /* Phone: hide the center nav (logo + Get in touch only) — chosen behavior */
   .nav { display: none; }
+
+  .grid { grid-template-columns: 1fr; }
 
   .intro { padding-block: 56px 48px; }
   .work,

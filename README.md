@@ -25,15 +25,15 @@ portfolio/
 
 ## Design system (mirrored from Framer)
 
-**Colors**
+**Colors** (light theme)
 
 | Token | Value |
 |-------|-------|
-| Background | `#0A0A0A` |
-| Surface | `#141414` |
-| Text | `#F2F0ED` |
-| Muted | `#8A8A85` |
-| Line | `rgba(255,255,255,0.1)` |
+| Background | `#FFFFFF` |
+| Surface | `#F4F2EF` |
+| Text | `#0A0A0A` |
+| Muted | `#6B6B66` |
+| Line | `rgba(0,0,0,0.12)` |
 | Accent | `#FF2D16` |
 
 **Type** — Inter (400 / 500 / 600), loaded from Google Fonts. Framer's text styles
@@ -67,8 +67,8 @@ CSS + a tiny `IntersectionObserver` — no framework runtime:
 
 ## Notes / assumptions
 
-- **Logo** — `logo.svg` (the brand ring mark, `#ECE9E2`) is used in the header and as the
-  browser favicon.
+- **Logo** — `logo.svg` (the brand ring mark, `#0A0A0A` to suit the light theme) is used in
+  the header and as the browser favicon.
 - **Reference file** — `berrielbrands_com.html` is the Framer export the design draws from.
   It's kept locally for reference and git-ignored (it's a 638 KB generated file).
 - **Images** are hot-linked from Framer's CDN (`framerusercontent.com`). To make the site
