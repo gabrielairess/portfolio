@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gabriel Aires — Brand Designer</title>
   <meta name="description" content="Brands built to change the game. Strategy, visual identity and design systems by Gabriel Aires." />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+  <!-- Mark JS as available so reveal animations only hide content when they can run -->
+  <script>document.documentElement.classList.add("js");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +20,7 @@
   <!-- Top bar -->
   <header class="container topbar">
     <a class="brand" href="#top" aria-label="Gabriel Aires home">
-      <span class="brand__dot" aria-hidden="true"></span>
+      <img class="brand__logo" src="logo.svg" alt="" width="26" height="26" aria-hidden="true" />
       <span class="brand__name">Gabriel Aires</span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -31,9 +35,9 @@
 
     <!-- Intro -->
     <section class="container intro">
-      <h1 class="display">Brands built to change the game.</h1>
-      <p class="body intro__sub">Through strategic insight, bold design and cultural edge, I craft identities that lead markets and shape perceptions.</p>
-      <div class="intro__actions">
+      <h1 class="display" data-reveal>Brands built to change the game.</h1>
+      <p class="body intro__sub" data-reveal>Through strategic insight, bold design and cultural edge, I craft identities that lead markets and shape perceptions.</p>
+      <div class="intro__actions" data-reveal>
         <a class="btn btn--light" href="#work">Explore work</a>
         <a class="btn btn--ghost" href="#contact">Get in touch</a>
       </div>
@@ -41,27 +45,27 @@
 
     <!-- Work -->
     <section class="container work" id="work">
-      <div class="work__head">
+      <div class="work__head" data-reveal>
         <span class="eyebrow">(Latest work)</span>
         <a class="eyebrow link" href="#contact">See all projects</a>
       </div>
       <div class="grid">
-        <figure class="tile">
+        <figure class="tile" data-reveal>
           <img src="https://framerusercontent.com/images/KwaaVacM0leSZHsSQdHlP1e0bs.jpg" alt="Brand project" loading="lazy" />
         </figure>
-        <figure class="tile">
+        <figure class="tile" data-reveal>
           <img src="https://framerusercontent.com/images/YCMtA9tTZ42VCuKaGSSqsZEBXUM.jpg" alt="Brand project" loading="lazy" />
         </figure>
-        <figure class="tile">
+        <figure class="tile" data-reveal>
           <img src="https://framerusercontent.com/images/fA51GEr6zghNGPMRRBLKpN8CCQ0.jpg" alt="Brand project" loading="lazy" />
         </figure>
-        <div class="tile tile--accent">
+        <div class="tile tile--accent" data-reveal>
           <p>It’s time to think bolder.</p>
         </div>
-        <figure class="tile">
+        <figure class="tile" data-reveal>
           <img src="https://framerusercontent.com/images/nHqykYzNioxRVvdjzF6u5aVCl2Q.jpg" alt="Brand project" loading="lazy" />
         </figure>
-        <figure class="tile">
+        <figure class="tile" data-reveal>
           <img src="https://framerusercontent.com/images/1KL6t4BgIzNCy06pKwG0fjIJ90.jpg" alt="Brand project" loading="lazy" />
         </figure>
       </div>
@@ -69,27 +73,27 @@
 
     <!-- Services -->
     <section class="container services" id="services">
-      <div class="services__head">
+      <div class="services__head" data-reveal>
         <span class="eyebrow">(Services)</span>
         <h2 class="section-title">I go beyond branding — delivering strategy and design built to stand out and perform.</h2>
       </div>
       <div class="services__list">
-        <div class="service-row">
+        <div class="service-row" data-reveal>
           <span class="service-row__num">01</span>
           <span class="service-row__label label">Brand Strategy</span>
           <p class="service-row__desc body">Positioning, competitive mapping, messaging and architecture that guide every design decision.</p>
         </div>
-        <div class="service-row">
+        <div class="service-row" data-reveal>
           <span class="service-row__num">02</span>
           <span class="service-row__label label">Visual Identity</span>
           <p class="service-row__desc body">Distinctive systems of type, color, imagery and motion that grow stronger with every impression.</p>
         </div>
-        <div class="service-row">
+        <div class="service-row" data-reveal>
           <span class="service-row__num">03</span>
           <span class="service-row__label label">Systems &amp; Guidelines</span>
           <p class="service-row__desc body">Living frameworks, components and usage rules that keep brands sharp anywhere they appear.</p>
         </div>
-        <div class="service-row">
+        <div class="service-row" data-reveal>
           <span class="service-row__num">04</span>
           <span class="service-row__label label">Collateral &amp; Launch</span>
           <p class="service-row__desc body">Campaign kits, pitch decks, packaging and signage produced with the same precision as the core.</p>
@@ -99,8 +103,8 @@
 
     <!-- About -->
     <section class="container about" id="about">
-      <img class="about__img" src="https://framerusercontent.com/images/PBO27uXpUaRpQBBr2BuaK0y9854.jpg" alt="Gabriel Aires" loading="lazy" />
-      <div class="about__content">
+      <img class="about__img" src="https://framerusercontent.com/images/PBO27uXpUaRpQBBr2BuaK0y9854.jpg" alt="Gabriel Aires" loading="lazy" data-reveal />
+      <div class="about__content" data-reveal>
         <span class="eyebrow">(About)</span>
         <h2 class="section-title">I’m Gabriel Aires, and I create brands that set new standards.</h2>
         <p class="body">With more than a decade in design and strategy, I create identities that cut through the noise and redefine how brands connect with their audience. My work blends insight, precision and bold creativity to deliver identities that own their space and perform in the market.</p>
@@ -110,13 +114,13 @@
 
     <!-- Contact -->
     <section class="container contact" id="contact">
-      <span class="eyebrow">(Contact)</span>
-      <h2 class="contact__title">Let’s create everything your brand needs</h2>
-      <div>
+      <span class="eyebrow" data-reveal>(Contact)</span>
+      <h2 class="contact__title" data-reveal>Let’s create everything your brand needs</h2>
+      <div data-reveal>
         <a class="btn btn--accent" href="mailto:hello@victorberriel.com">hello@victorberriel.com</a>
       </div>
-      <div class="footer">
-        <span class="eyebrow">© 2026 Gabriel Aires</span>
+      <div class="footer" data-reveal>
+        <span class="eyebrow">© <span id="year">2026</span> Gabriel Aires</span>
         <nav class="footer__social" aria-label="Social">
           <a class="eyebrow" href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
           <a class="eyebrow" href="https://behance.net" target="_blank" rel="noopener">Behance</a>
@@ -127,5 +131,6 @@
 
   </main>
 
+  <script src="main.js" defer></script>
 </body>
 </html>

@@ -15,9 +15,11 @@ npx serve .
 ## Structure
 
 ```
-my-project-2/
+portfolio/
 ├── index.html    # all markup (Top bar, Intro, Work, Services, About, Contact)
-├── styles.css    # design tokens, type styles, layout, responsive rules
+├── styles.css    # design tokens, type styles, layout, reveal + responsive rules
+├── main.js       # dynamic year + reveal-on-scroll (IntersectionObserver)
+├── logo.svg      # brand mark — used in the header and as the favicon
 └── README.md
 ```
 
@@ -51,8 +53,24 @@ Mirrors the Framer breakpoints (Desktop / Tablet / Phone), with a few things don
 - **Phone nav** — the center nav (Work / Services / About) is hidden under 700px, leaving
   the logo + "Get in touch" (the chosen mobile behavior).
 
+## Animations
+
+Inspired by the reference Framer build (`berrielbrands_com.html`), reproduced with plain
+CSS + a tiny `IntersectionObserver` — no framework runtime:
+
+- **Reveal on scroll** — elements fade in and rise from `translateY(16px)` as they enter the
+  viewport (Framer's signature "appear" effect), with a slight stagger across grids/rows.
+- **Eased hovers** — nav, links and social use Framer's `cubic-bezier(.5,0,.88,.77)` over `.2s`.
+- **Progressive enhancement** — reveal styles are scoped to `.js`, so the page is fully
+  visible even if JavaScript never runs, and everything shows instantly under
+  `prefers-reduced-motion: reduce`.
+
 ## Notes / assumptions
 
+- **Logo** — `logo.svg` (the brand ring mark, `#ECE9E2`) is used in the header and as the
+  browser favicon.
+- **Reference file** — `berrielbrands_com.html` is the Framer export the design draws from.
+  It's kept locally for reference and git-ignored (it's a 638 KB generated file).
 - **Images** are hot-linked from Framer's CDN (`framerusercontent.com`). To make the site
   fully self-contained, download them into an `images/` folder and update the `src`s.
 - **Muted text colors** — Framer's exported text styles didn't include color values, so
